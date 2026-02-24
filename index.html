@@ -1,0 +1,1647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arikon — AI-Powered Real Estate Solutions</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/umd/lucide.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+      --font-display: 'Outfit', sans-serif;
+      --gray-50: #F9FAFB;
+      --gray-100: #F3F4F6;
+      --gray-200: #E5E7EB;
+      --gray-400: #9CA3AF;
+      --gray-500: #6B7280;
+      --gray-600: #4B5563;
+      --gray-700: #374151;
+      --gray-900: #111827;
+      --blue-50: #EFF6FF;
+      --blue-100: #DBEAFE;
+      --blue-600: #2563EB;
+      --blue-700: #1D4ED8;
+      --indigo-50: #EEF2FF;
+      --indigo-600: #4F46E5;
+      --green-50: #F0FDF4;
+      --green-100: #DCFCE7;
+      --green-600: #16A34A;
+      --green-700: #15803D;
+      --red-50: #FFF2F2;
+      --red-100: #FFE4E6;
+      --red-700: #B91C1C;
+      --bg: #F8F9FA;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg);
+      color: var(--gray-900);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ── Utility ── */
+    .max-w-7xl { max-width: 80rem; margin-inline: auto; }
+    .max-w-5xl { max-width: 64rem; margin-inline: auto; }
+    .max-w-4xl { max-width: 56rem; margin-inline: auto; }
+    .max-w-2xl { max-width: 42rem; }
+    .px-6 { padding-inline: 1.5rem; }
+
+    .font-display { font-family: var(--font-display); }
+
+    .bento-card {
+      background: white;
+      border-radius: 2.5rem;
+      padding: 2.5rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+      border: 1px solid #F1F3F4;
+      transition: all 0.5s ease;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+    .bento-card:hover {
+      box-shadow: 0 20px 50px rgba(0,0,0,0.06);
+      transform: translateY(-4px);
+    }
+    .bento-card .top-accent {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      opacity: 0;
+      transition: opacity 0.5s;
+    }
+    .bento-card:hover .top-accent { opacity: 1; }
+
+    .benefit-box {
+      padding: 1.25rem;
+      border-radius: 1rem;
+      border: 1px solid var(--gray-100);
+      background: rgba(249,250,251,0.5);
+      transition: all 0.3s;
+    }
+    .benefit-box:hover {
+      background: white;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      border-color: transparent;
+    }
+
+    .bg-grid {
+      background-size: 40px 40px;
+      background-image: radial-gradient(circle, #00000008 1px, transparent 1px);
+    }
+    .bg-grid-dark {
+      background-size: 40px 40px;
+      background-image: radial-gradient(circle, #ffffff08 1px, transparent 1px);
+    }
+
+    @keyframes float {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    .animate-float { animation: float 4s ease-in-out infinite; }
+
+    @keyframes gradient-flow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .animate-gradient {
+      background: linear-gradient(to right, #4F46E5, #3B82F6, #06B6D4, #10B981, #3B82F6);
+      background-size: 300% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: gradient-flow 6s ease infinite;
+    }
+
+    /* ── Navbar ── */
+    #navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 50;
+      padding: 1rem 1.5rem;
+      transition: all 0.3s;
+    }
+    #navbar.scrolled {
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--gray-100);
+      padding-block: 0.75rem;
+    }
+    #navbar .inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+    }
+    .logo-icon {
+      width: 2.5rem; height: 2.5rem;
+      background: black;
+      border-radius: 0.75rem;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .logo-icon span {
+      color: white;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.25rem;
+    }
+    .logo-text {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.5rem;
+      letter-spacing: -0.02em;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+    .nav-links a {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--gray-600);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: black; }
+    .btn-nav {
+      background: black;
+      color: white !important;
+      padding: 0.625rem 1.5rem;
+      border-radius: 9999px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.2s;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+    }
+    .btn-nav:hover { background: #1f1f1f !important; color: white !important; }
+
+    .mobile-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.5rem;
+      color: black;
+    }
+    #mobile-menu {
+      display: none;
+      position: absolute;
+      top: 100%; left: 0; right: 0;
+      background: white;
+      border-bottom: 1px solid var(--gray-100);
+      padding: 1.5rem;
+      flex-direction: column;
+      gap: 1rem;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+    }
+    #mobile-menu.open { display: flex; }
+    #mobile-menu a {
+      font-size: 1.125rem;
+      font-weight: 500;
+      color: black;
+      text-decoration: none;
+    }
+    #mobile-menu .btn-mobile {
+      background: black;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 9999px;
+      font-size: 1.125rem;
+      font-weight: 600;
+      text-align: center;
+      border: none;
+      cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .mobile-toggle { display: block; }
+    }
+
+    /* ── Hero ── */
+    #hero {
+      position: relative;
+      padding-top: 8rem;
+      padding-bottom: 5rem;
+      overflow: hidden;
+      text-align: center;
+    }
+    .hero-bg-1 {
+      position: absolute;
+      top: -10%; left: -10%;
+      width: 40%; height: 40%;
+      background: #EFF6FF;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: 0.6;
+      pointer-events: none;
+      z-index: -1;
+    }
+    .hero-bg-2 {
+      position: absolute;
+      bottom: 10%; right: -5%;
+      width: 30%; height: 30%;
+      background: var(--indigo-50);
+      border-radius: 50%;
+      filter: blur(100px);
+      opacity: 0.6;
+      pointer-events: none;
+      z-index: -1;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.375rem 1rem;
+      border-radius: 9999px;
+      background: var(--blue-50);
+      border: 1px solid var(--blue-100);
+      color: var(--blue-600);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 2rem;
+    }
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 7vw, 4.5rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      color: var(--gray-900);
+      margin-bottom: 1.5rem;
+      max-width: 56rem;
+      margin-inline: auto;
+    }
+    .hero-sub {
+      font-size: 1.25rem;
+      color: var(--gray-500);
+      max-width: 42rem;
+      margin: 0 auto 2.5rem;
+      line-height: 1.7;
+    }
+    .hero-btns {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 5rem;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: black;
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 9999px;
+      font-size: 1.125rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.2s, gap 0.2s;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    }
+    .btn-primary:hover { background: #1f1f1f; }
+    .btn-primary .arrow { transition: transform 0.2s; }
+    .btn-primary:hover .arrow { transform: translateX(4px); }
+    .btn-secondary {
+      display: inline-block;
+      background: white;
+      color: black;
+      border: 1px solid var(--gray-200);
+      padding: 1rem 2rem;
+      border-radius: 9999px;
+      font-size: 1.125rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.2s;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    }
+    .btn-secondary:hover { background: var(--gray-50); }
+
+    /* Hero image */
+    .hero-image-wrap {
+      position: relative;
+      max-width: 64rem;
+      margin-inline: auto;
+    }
+    .hero-image-inner {
+      border-radius: 1.5rem;
+      overflow: hidden;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.15);
+      border: 1px solid var(--gray-200);
+      background: white;
+      padding: 0.5rem;
+      position: relative;
+    }
+    .hero-image-inner img {
+      width: 100%;
+      height: auto;
+      border-radius: 1rem;
+      object-fit: cover;
+      aspect-ratio: 21/9;
+      display: block;
+    }
+    .hero-image-inner .overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.2), transparent);
+      pointer-events: none;
+      border-radius: 1rem;
+    }
+    .hero-float {
+      position: absolute;
+      background: white;
+      padding: 1rem;
+      border-radius: 1rem;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+      border: 1px solid var(--gray-100);
+      display: none;
+      align-items: center;
+      gap: 0.75rem;
+      z-index: 20;
+    }
+    @media (min-width: 768px) { .hero-float { display: flex; } }
+    .hero-float-1 { top: -1.5rem; right: -1.5rem; }
+    .hero-float-2 { bottom: -1.5rem; left: -1.5rem; }
+    .hero-float-icon {
+      width: 2.5rem; height: 2.5rem;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .hero-float-icon.green { background: #DCFCE7; color: var(--green-600); }
+    .hero-float-icon.blue { background: var(--blue-50); color: var(--blue-600); }
+    .hero-float p:first-child { font-size: 0.75rem; color: var(--gray-500); font-weight: 500; }
+    .hero-float p:last-child { font-size: 0.875rem; font-weight: 700; }
+
+    /* ── Solutions ── */
+    #solutions {
+      padding-block: 6rem;
+      background: white;
+    }
+    .section-heading {
+      text-align: center;
+      margin-bottom: 5rem;
+    }
+    .section-heading h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 3.75rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+    }
+    .section-heading p {
+      color: var(--gray-500);
+      max-width: 42rem;
+      margin-inline: auto;
+      font-size: 1.25rem;
+      font-weight: 300;
+      line-height: 1.7;
+    }
+
+    .solutions-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+    @media (min-width: 1024px) {
+      .solutions-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    .solution-icon {
+      width: 5rem; height: 5rem;
+      border-radius: 2rem;
+      display: flex; align-items: center; justify-content: center;
+      color: white;
+      box-shadow: 0 20px 50px;
+      transition: transform 0.5s;
+    }
+    .bento-card:hover .solution-icon { transform: rotate(6deg); }
+    .bento-card:hover .solution-icon.left { transform: rotate(-6deg); }
+    .solution-icon.blue { background: var(--blue-600); box-shadow-color: rgba(37,99,235,0.3); }
+    .solution-icon.dark { background: var(--gray-900); }
+    .badge {
+      font-size: 0.625rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+    }
+    .badge.blue { background: var(--blue-50); color: var(--blue-600); }
+    .badge.indigo { background: var(--indigo-50); color: var(--indigo-600); }
+
+    .bento-card h3 {
+      font-family: var(--font-display);
+      font-size: 2.25rem;
+      font-weight: 700;
+      color: var(--gray-900);
+      margin-bottom: 1.5rem;
+    }
+    .bento-card > p {
+      color: var(--gray-500);
+      font-size: 1.125rem;
+      line-height: 1.7;
+      font-weight: 300;
+      margin-bottom: 2.5rem;
+      flex-grow: 1;
+    }
+
+    .benefit-box-inner {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+    .benefit-icon {
+      width: 2.5rem; height: 2.5rem;
+      background: white;
+      border-radius: 0.75rem;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+      flex-shrink: 0;
+    }
+    .benefit-icon.blue { color: var(--blue-600); }
+    .benefit-icon.indigo { color: var(--indigo-600); }
+    .benefit-icon.purple { color: #7C3AED; }
+    .benefit-box h4 {
+      font-weight: 700;
+      color: var(--gray-900);
+      margin-bottom: 0.25rem;
+      font-size: 0.9375rem;
+    }
+    .benefit-box p {
+      font-size: 0.875rem;
+      color: var(--gray-500);
+      line-height: 1.6;
+    }
+
+    .btn-dark {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      width: 100%;
+      padding: 1.25rem;
+      border-radius: 1rem;
+      background: var(--gray-900);
+      color: white;
+      font-weight: 700;
+      font-size: 1rem;
+      text-decoration: none;
+      transition: background 0.2s;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+      margin-top: auto;
+    }
+    .btn-dark:hover { background: black; }
+    .btn-dark .arrow { transition: transform 0.2s; }
+    .btn-dark:hover .arrow { transform: translateX(4px); }
+
+    /* ── Contact ── */
+    #contact {
+      padding-block: 8rem;
+      background: white;
+      position: relative;
+      overflow: hidden;
+    }
+    .contact-bg {
+      position: absolute;
+      top: 0; right: 0;
+      width: 50%; height: 50%;
+      background: rgba(239,246,255,0.3);
+      border-radius: 50%;
+      filter: blur(120px);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 5rem;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+    @media (min-width: 1024px) {
+      .contact-grid { grid-template-columns: 1fr 1fr; }
+    }
+    .contact-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 5vw, 3.75rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: 2rem;
+    }
+    .contact-title span { color: var(--blue-600); }
+    .contact-sub {
+      font-size: 1.25rem;
+      color: var(--gray-500);
+      font-weight: 300;
+      line-height: 1.7;
+      margin-bottom: 3rem;
+      max-width: 32rem;
+    }
+    .contact-info {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+    .contact-info-icon {
+      width: 3.5rem; height: 3.5rem;
+      background: var(--blue-50);
+      border-radius: 1rem;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--blue-600);
+      transition: transform 0.3s;
+    }
+    .contact-info:hover .contact-info-icon { transform: scale(1.1); }
+    .contact-info h5 { font-weight: 700; color: var(--gray-900); font-size: 1.125rem; }
+    .contact-info p { color: var(--gray-500); }
+
+    .contact-form-card {
+      background: white;
+      padding: clamp(2.5rem, 5vw, 3.5rem);
+      border-radius: 3rem;
+      border: 1px solid var(--gray-100);
+      box-shadow: 0 30px 80px rgba(0,0,0,0.05);
+    }
+    .form-group { display: flex; flex-direction: column; gap: 0.75rem; }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+    @media (min-width: 768px) {
+      .form-row { grid-template-columns: 1fr 1fr; }
+    }
+    .form-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--gray-400);
+      margin-left: 0.25rem;
+    }
+    .form-input, .form-textarea {
+      width: 100%;
+      padding: 1rem 1.5rem;
+      border-radius: 1rem;
+      background: var(--gray-50);
+      border: 1px solid transparent;
+      outline: none;
+      transition: all 0.2s;
+      font-family: var(--font-sans);
+      font-size: 1rem;
+      color: var(--gray-900);
+    }
+    .form-input:focus, .form-textarea:focus {
+      background: white;
+      border-color: var(--blue-600);
+      box-shadow: 0 0 0 4px rgba(37,99,235,0.05);
+    }
+    .form-textarea { resize: none; }
+    .form-submit {
+      width: 100%;
+      padding: 1.25rem;
+      border-radius: 1rem;
+      background: var(--blue-600);
+      color: white;
+      font-weight: 700;
+      font-size: 1rem;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      box-shadow: 0 10px 40px rgba(37,99,235,0.2);
+      font-family: var(--font-sans);
+    }
+    .form-submit:hover { background: var(--blue-700); }
+    .form-submit:active { transform: scale(0.98); }
+    .form-submit:disabled { background: var(--gray-400); cursor: not-allowed; }
+    .form-success {
+      padding: 1rem;
+      background: var(--green-50);
+      color: var(--green-700);
+      border: 1px solid var(--green-100);
+      border-radius: 1rem;
+      text-align: center;
+      font-weight: 500;
+      display: none;
+    }
+    .form-error {
+      padding: 1rem;
+      background: var(--red-50);
+      color: var(--red-700);
+      border: 1px solid var(--red-100);
+      border-radius: 1rem;
+      text-align: center;
+      font-weight: 500;
+      display: none;
+    }
+    .form-space { display: flex; flex-direction: column; gap: 2rem; }
+
+    /* ── Features ── */
+    #features {
+      padding-block: 8rem;
+      background: white;
+      position: relative;
+      overflow: hidden;
+    }
+    .features-head {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 2rem;
+      margin-bottom: 5rem;
+    }
+    @media (min-width: 768px) {
+      .features-head { flex-direction: row; align-items: flex-end; }
+    }
+    .features-head-left { max-width: 42rem; }
+    .features-head-left h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+    }
+    .features-head-left p {
+      color: var(--gray-500);
+      font-size: 1.25rem;
+      font-weight: 300;
+      line-height: 1.7;
+    }
+    .features-link {
+      color: var(--blue-600);
+      font-weight: 700;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      white-space: nowrap;
+      transition: gap 0.2s;
+    }
+    .features-link:hover { gap: 1rem; }
+    .features-link .arrow { transition: transform 0.2s; }
+    .features-link:hover .arrow { transform: translateX(4px); }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+    @media (min-width: 640px) { .features-grid { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 1024px) { .features-grid { grid-template-columns: repeat(4, 1fr); } }
+
+    .feature-card {
+      background: white;
+      padding: 2.5rem;
+      border-radius: 2.5rem;
+      border: 1px solid var(--gray-100);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+      transition: all 0.5s;
+    }
+    .feature-card:hover {
+      box-shadow: 0 20px 50px rgba(0,0,0,0.04);
+    }
+    .feature-icon-wrap {
+      width: 3.5rem; height: 3.5rem;
+      background: var(--gray-50);
+      border-radius: 1rem;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 2rem;
+      transition: all 0.5s;
+    }
+    .feature-card:hover .feature-icon-wrap {
+      transform: scale(1.1);
+      background: var(--blue-50);
+    }
+    .feature-card h4 {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--gray-900);
+      margin-bottom: 1rem;
+    }
+    .feature-card p {
+      color: var(--gray-500);
+      font-size: 1rem;
+      line-height: 1.6;
+      font-weight: 300;
+    }
+
+    /* ── How It Works ── */
+    #how-it-works {
+      padding-block: 8rem;
+      background: var(--gray-900);
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+    .how-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      position: relative;
+    }
+    @media (min-width: 768px) {
+      .how-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    .how-card {
+      position: relative;
+    }
+    .how-number {
+      font-family: var(--font-display);
+      font-size: 6rem;
+      font-weight: 900;
+      color: rgba(255,255,255,0.04);
+      position: absolute;
+      top: -2.5rem;
+      left: -1rem;
+      line-height: 1;
+      transition: color 0.5s;
+      pointer-events: none;
+    }
+    .how-card:hover .how-number { color: rgba(37,99,235,0.1); }
+    .how-card-inner {
+      position: relative;
+      z-index: 10;
+      padding-top: 2.5rem;
+    }
+    .how-card h4 {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .how-step-badge {
+      width: 2rem; height: 2rem;
+      background: var(--blue-600);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .how-card p {
+      color: #9CA3AF;
+      font-size: 1.125rem;
+      line-height: 1.7;
+      font-weight: 300;
+    }
+    .how-divider {
+      display: none;
+      position: absolute;
+      top: 50%;
+      right: -1.5rem;
+      width: 3rem;
+      height: 1px;
+      background: rgba(255,255,255,0.1);
+    }
+    @media (min-width: 1024px) { .how-divider { display: block; } }
+
+    /* ── CTA ── */
+    #cta { padding-block: 6rem; padding-inline: 1.5rem; }
+    .cta-card {
+      max-width: 64rem;
+      margin-inline: auto;
+      background: var(--blue-600);
+      border-radius: 3rem;
+      padding: clamp(3rem, 8vw, 5rem);
+      text-align: center;
+      color: white;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 30px 80px rgba(37,99,235,0.3);
+    }
+    .cta-bg-1 {
+      position: absolute;
+      top: -20%; left: -10%;
+      width: 60%; height: 60%;
+      background: white;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: 0.1;
+      pointer-events: none;
+    }
+    .cta-bg-2 {
+      position: absolute;
+      bottom: -20%; right: -10%;
+      width: 60%; height: 60%;
+      background: white;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: 0.1;
+      pointer-events: none;
+    }
+    .cta-card h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 3.75rem);
+      font-weight: 700;
+      margin-bottom: 2rem;
+      line-height: 1.2;
+      position: relative;
+    }
+    .cta-card p {
+      font-size: 1.25rem;
+      color: rgba(219,234,254,1);
+      margin-bottom: 3rem;
+      max-width: 42rem;
+      margin-inline: auto;
+      position: relative;
+    }
+    .cta-btns {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      position: relative;
+    }
+    .btn-cta-white {
+      background: white;
+      color: var(--blue-600);
+      padding: 1rem 2.5rem;
+      border-radius: 9999px;
+      font-size: 1.125rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: background 0.2s;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+    .btn-cta-white:hover { background: var(--blue-50); }
+    .btn-cta-dark {
+      background: rgba(29,78,216,1);
+      color: white;
+      border: 1px solid rgba(96,165,250,0.4);
+      padding: 1rem 2.5rem;
+      border-radius: 9999px;
+      font-size: 1.125rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .btn-cta-dark:hover { background: #1e40af; }
+
+    /* ── Footer ── */
+    footer {
+      background: white;
+      border-top: 1px solid var(--gray-100);
+      padding-top: 5rem;
+      padding-bottom: 2.5rem;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 3rem;
+      margin-bottom: 5rem;
+    }
+    @media (min-width: 1024px) {
+      .footer-grid { grid-template-columns: 2fr 1fr 1fr 1fr; }
+    }
+    .footer-brand .logo { margin-bottom: 1.5rem; }
+    .footer-brand .logo-icon { width: 2rem; height: 2rem; border-radius: 0.5rem; }
+    .footer-brand .logo-icon span { font-size: 1.125rem; }
+    .footer-brand .logo-text { font-size: 1.25rem; }
+    .footer-brand p {
+      color: var(--gray-500);
+      max-width: 18rem;
+      margin-bottom: 2rem;
+      font-size: 0.9375rem;
+    }
+    .footer-socials {
+      display: flex;
+      gap: 1rem;
+    }
+    .social-btn {
+      width: 2.5rem; height: 2.5rem;
+      background: var(--gray-50);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--gray-400);
+      cursor: pointer;
+      transition: color 0.2s;
+      border: none;
+    }
+    .social-btn:hover { color: black; }
+    .footer-col h5 {
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      font-size: 1rem;
+    }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 1rem; }
+    .footer-col ul li a, .footer-col ul li button {
+      color: var(--gray-500);
+      font-size: 0.875rem;
+      text-decoration: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: var(--font-sans);
+      padding: 0;
+      transition: color 0.2s;
+    }
+    .footer-col ul li a:hover, .footer-col ul li button:hover { color: black; }
+    .footer-bottom {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 2.5rem;
+      border-top: 1px solid var(--gray-100);
+      color: var(--gray-400);
+      font-size: 0.75rem;
+      gap: 1rem;
+    }
+    @media (min-width: 768px) { .footer-bottom { flex-direction: row; } }
+
+    /* ── Legal Page ── */
+    #legal-page {
+      display: none;
+      min-height: 100vh;
+      background: white;
+      padding-top: 8rem;
+      padding-bottom: 5rem;
+      padding-inline: 1.5rem;
+    }
+    #legal-page .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--blue-600);
+      font-weight: 600;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: var(--font-sans);
+      font-size: 1rem;
+      margin-bottom: 2rem;
+      padding: 0;
+      transition: gap 0.2s;
+    }
+    #legal-page .back-btn:hover { gap: 0.75rem; }
+    #legal-page h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700;
+      margin-bottom: 3rem;
+    }
+    #legal-page .content {
+      color: var(--gray-700);
+      line-height: 1.8;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      font-size: 1rem;
+    }
+    #legal-page .content p { max-width: 56rem; }
+
+    /* ── Page visibility ── */
+    #main-content { display: block; }
+
+    /* ── Scroll animations ── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .fade-left {
+      opacity: 0;
+      transform: translateX(-20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-left.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .fade-right {
+      opacity: 0;
+      transform: translateX(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-right.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAVBAR ── -->
+<nav id="navbar">
+  <div class="max-w-7xl inner">
+    <a class="logo" href="#" onclick="showHome(event)">
+      <div class="logo-icon"><span>A</span></div>
+      <span class="logo-text">Arikon</span>
+    </a>
+    <div class="nav-links">
+      <a href="#solutions" onclick="showHome(event, '#solutions')">Solutions</a>
+      <a href="#features" onclick="showHome(event, '#features')">Features</a>
+      <a href="#how-it-works" onclick="showHome(event, '#how-it-works')">How it Works</a>
+      <a href="#contact" class="btn-nav" onclick="showHome(event, '#contact')">Get Started</a>
+    </div>
+    <button class="mobile-toggle" id="mobileToggle" onclick="toggleMobile()" aria-label="Menu">
+      <svg id="menuIcon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      <svg id="closeIcon" style="display:none" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <div id="mobile-menu">
+    <a href="#solutions" onclick="closeMobile(); showHome(event, '#solutions')">Solutions</a>
+    <a href="#features" onclick="closeMobile(); showHome(event, '#features')">Features</a>
+    <a href="#how-it-works" onclick="closeMobile(); showHome(event, '#how-it-works')">How it Works</a>
+    <button class="btn-mobile" onclick="closeMobile(); showHome(event, '#contact')">Get Started</button>
+  </div>
+</nav>
+
+<!-- ── MAIN CONTENT ── -->
+<div id="main-content">
+
+  <!-- Hero -->
+  <section id="hero">
+    <div class="hero-bg-1"></div>
+    <div class="hero-bg-2"></div>
+    <div class="max-w-7xl px-6">
+      <div class="hero-badge">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
+        AI-Powered Real Estate Solutions
+      </div>
+      <h1 class="hero-title">
+        Intelligent Automation for <span class="animate-gradient">Australian Real Estate</span>
+      </h1>
+      <p class="hero-sub">
+        Arikon empowers agencies with state-of-the-art AI models to handle seller enquiries and voice interactions, ensuring you never miss an opportunity.
+      </p>
+      <div class="hero-btns">
+        <a href="#contact" class="btn-primary">
+          Book a Demo
+          <svg class="arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
+        <a href="#solutions" class="btn-secondary">View Solutions</a>
+      </div>
+
+      <div class="hero-image-wrap">
+        <div class="hero-image-inner">
+          <img src="https://photos.fife.usercontent.google.com/pw/AP1GczNpGTFzrGW0MMrFDgNOGjqgVgpx43Txy4g6nfYJCUzjpe2Z_5YKlPkQ=w1059-h706-no?authuser=0" alt="Arikon Platform" referrerpolicy="no-referrer" />
+          <div class="overlay"></div>
+        </div>
+        <div class="hero-float hero-float-1 animate-float">
+          <div class="hero-float-icon green">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          </div>
+          <div>
+            <p>Response Time</p>
+            <p>Under 5 Seconds</p>
+          </div>
+        </div>
+        <div class="hero-float hero-float-2 animate-float" style="animation-delay:2s">
+          <div class="hero-float-icon blue">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 11a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.5 0h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 7.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 14.92z"/></svg>
+          </div>
+          <div>
+            <p>Calls Handled</p>
+            <p>24/7 Availability</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Solutions -->
+  <section id="solutions" style="padding-block:6rem;background:white;">
+    <div class="max-w-7xl px-6">
+      <div class="section-heading fade-in">
+        <h2>Our Solutions</h2>
+        <p>State-of-the-art AI models specifically engineered to solve the most pressing challenges in Australian Real Estate.</p>
+      </div>
+      <div class="solutions-grid">
+        <!-- Appraisal Accelerator -->
+        <div class="bento-card fade-left">
+          <div class="top-accent" style="background:linear-gradient(to right,#2563EB,#4F46E5)"></div>
+          <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:2.5rem;">
+            <div class="solution-icon blue">
+              <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+            </div>
+            <span class="badge blue">Automated</span>
+          </div>
+          <h3>Appraisal Accelerator</h3>
+          <p>The ultimate response engine for high-performing agencies. It ensures every seller enquiry is met with a professional, data-driven response within seconds—24/7.</p>
+          <div style="display:flex;flex-direction:column;gap:1.25rem;margin-bottom:3rem;">
+            <div class="benefit-box">
+              <div class="benefit-box-inner">
+                <div class="benefit-icon blue">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                </div>
+                <div>
+                  <h4>Instant Engagement</h4>
+                  <p>Capture leads when their intent is highest. Zero wait time means zero lost opportunities.</p>
+                </div>
+              </div>
+            </div>
+            <div class="benefit-box">
+              <div class="benefit-box-inner">
+                <div class="benefit-icon indigo">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="10" x="3" y="11" rx="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4"/><line x1="8" y1="16" x2="8" y2="16"/><line x1="16" y1="16" x2="16" y2="16"/></svg>
+                </div>
+                <div>
+                  <h4>Intelligent Qualification</h4>
+                  <p>Automatically qualifies sellers and gathers critical property data before you even pick up the phone.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <a href="#contact" class="btn-dark">
+            Get Started
+            <svg class="arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+        </div>
+
+        <!-- Voice Agent -->
+        <div class="bento-card fade-right">
+          <div class="top-accent" style="background:linear-gradient(to right,#4F46E5,#7C3AED)"></div>
+          <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:2.5rem;">
+            <div class="solution-icon dark left">
+              <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 11a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.5 0h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 7.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 14.92z"/></svg>
+            </div>
+            <span class="badge indigo">Voice AI</span>
+          </div>
+          <h3>Arikon Voice Agent</h3>
+          <p>A human-like AI voice assistant trained specifically for your agency. It manages your entire phone workflow with indistinguishable natural language.</p>
+          <div style="display:flex;flex-direction:column;gap:1.25rem;margin-bottom:3rem;">
+            <div class="benefit-box">
+              <div class="benefit-box-inner">
+                <div class="benefit-icon indigo">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                </div>
+                <div>
+                  <h4>Automated Bookings</h4>
+                  <p>Directly integrates with your calendar to schedule appraisals and inspections without human intervention.</p>
+                </div>
+              </div>
+            </div>
+            <div class="benefit-box">
+              <div class="benefit-box-inner">
+                <div class="benefit-icon purple">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                </div>
+                <div>
+                  <h4>Natural Conversations</h4>
+                  <p>Advanced speech synthesis that sounds indistinguishable from a local agent, maintaining your professional image.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <a href="#contact" class="btn-dark">
+            Book a Demo
+            <svg class="arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section id="features" class="bg-grid" style="padding-block:8rem;background:white;position:relative;overflow:hidden;">
+    <div class="max-w-7xl px-6" style="position:relative;z-index:10;">
+      <div class="features-head">
+        <div class="features-head-left fade-in">
+          <h2>Built for the Modern Agency</h2>
+          <p>We combine cutting-edge LLMs with deep real estate domain knowledge to deliver results that matter.</p>
+        </div>
+        <a href="#contact" class="features-link">
+          Explore all features
+          <svg class="arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card fade-in" style="transition-delay:0s">
+          <div class="feature-icon-wrap" style="color:var(--blue-600)">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <h4>24/7 Availability</h4>
+          <p>Your agency never sleeps. Handle enquiries and calls at 2 AM or 2 PM with consistent quality.</p>
+        </div>
+        <div class="feature-card fade-in" style="transition-delay:0.1s">
+          <div class="feature-icon-wrap" style="color:var(--indigo-600)">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </div>
+          <h4>Auto-Booking</h4>
+          <p>Automatically sync with your team's calendars to book appraisals and inspections without manual intervention.</p>
+        </div>
+        <div class="feature-card fade-in" style="transition-delay:0.2s">
+          <div class="feature-icon-wrap" style="color:#059669">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h4>Local Expertise</h4>
+          <p>Trained on Australian real estate data and regulations to provide accurate, compliant information.</p>
+        </div>
+        <div class="feature-card fade-in" style="transition-delay:0.3s">
+          <div class="feature-icon-wrap" style="color:#EA580C">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div>
+          <h4>Scalable Growth</h4>
+          <p>Handle 10 or 1,000 enquiries simultaneously. Our AI infrastructure scales with your agency's success.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section id="how-it-works" class="bg-grid-dark" style="padding-block:8rem;background:var(--gray-900);color:white;position:relative;overflow:hidden;">
+    <div class="max-w-7xl px-6" style="position:relative;z-index:10;">
+      <div class="section-heading fade-in">
+        <h2>Simple Implementation</h2>
+        <p style="color:#9CA3AF;">Getting started with Arikon is simple and fully managed by our team. No complex setup. No disruption to your workflow.</p>
+      </div>
+      <div class="how-grid">
+        <div class="how-card fade-in" style="transition-delay:0s">
+          <div class="how-number">01</div>
+          <div class="how-card-inner">
+            <h4>
+              <span class="how-step-badge">1</span>
+              Connect Your CRM
+            </h4>
+            <p>We securely integrate with your existing CRM, listings, and enquiry sources so Arikon understands your properties, vendors, and local market instantly.</p>
+          </div>
+          <div class="how-divider"></div>
+        </div>
+        <div class="how-card fade-in" style="transition-delay:0.1s">
+          <div class="how-number">02</div>
+          <div class="how-card-inner">
+            <h4>
+              <span class="how-step-badge">2</span>
+              Tailored to Your Agency
+            </h4>
+            <p>Your automation is configured to match your brand voice, suburb expertise, and appraisal strategy, ensuring every seller enquiry is handled professionally.</p>
+          </div>
+          <div class="how-divider"></div>
+        </div>
+        <div class="how-card fade-in" style="transition-delay:0.2s">
+          <div class="how-number">03</div>
+          <div class="how-card-inner">
+            <h4>
+              <span class="how-step-badge">3</span>
+              Start Capturing More Listings
+            </h4>
+            <p>Once activated, Arikon responds to seller enquiries across your website, portals, and phone lines, 24/7, so you never miss an opportunity.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <div class="contact-bg"></div>
+    <div class="max-w-7xl px-6">
+      <div class="contact-grid">
+        <div class="fade-left">
+          <h2 class="contact-title">Let's talk about your agency's <span>future.</span></h2>
+          <p class="contact-sub">Ready to automate your growth? Our team is here to help you find the perfect AI solution for your specific needs.</p>
+          <div class="contact-info">
+            <div class="contact-info-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            </div>
+            <div>
+              <h5>Email Us</h5>
+              <p>info@arikon.com.au</p>
+            </div>
+          </div>
+        </div>
+        <div class="contact-form-card fade-right">
+          <form id="contactForm" class="form-space" onsubmit="handleSubmit(event)">
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Full Name</label>
+                <input class="form-input" type="text" placeholder="John Smith" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Email Address</label>
+                <input class="form-input" type="email" placeholder="john@agency.com.au" required />
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Phone Number</label>
+              <input class="form-input" type="tel" placeholder="0400 000 000" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Message</label>
+              <textarea class="form-input form-textarea" rows="4" placeholder="Tell us about your agency..." required></textarea>
+            </div>
+            <button type="submit" class="form-submit" id="submitBtn">
+              <span id="submitText">Send Message</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </button>
+            <div class="form-success" id="formSuccess">Message sent successfully! We'll be in touch.</div>
+            <div class="form-error" id="formError">Something went wrong. Please try again.</div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section id="cta">
+    <div class="cta-card fade-in">
+      <div class="cta-bg-1"></div>
+      <div class="cta-bg-2"></div>
+      <h2>Ready to transform your agency?</h2>
+      <p>Join the leading Australian real estate agencies using Arikon to automate their growth.</p>
+      <div class="cta-btns">
+        <a href="#contact" class="btn-cta-white">Book Your Free Demo</a>
+        <a href="#contact" class="btn-cta-dark">Contact Sales</a>
+      </div>
+    </div>
+  </section>
+
+</div><!-- end main-content -->
+
+<!-- ── LEGAL PAGE ── -->
+<div id="legal-page">
+  <div class="max-w-4xl">
+    <button class="back-btn" onclick="showHome()">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+      Back to Home
+    </button>
+    <h1 id="legal-title"></h1>
+    <div class="content" id="legal-content"></div>
+  </div>
+</div>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="max-w-7xl px-6">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="logo" href="#" onclick="showHome(event)">
+          <div class="logo-icon"><span>A</span></div>
+          <span class="logo-text">Arikon</span>
+        </a>
+        <p>State-of-the-art AI solutions for the Australian Real Estate market.</p>
+        <div class="footer-socials">
+          <button class="social-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </button>
+          <button class="social-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h5>Solutions</h5>
+        <ul>
+          <li><a href="#solutions" onclick="showHome(event,'#solutions')">Appraisal Accelerator</a></li>
+          <li><a href="#solutions" onclick="showHome(event,'#solutions')">Voice Agent</a></li>
+          <li><a href="#features" onclick="showHome(event,'#features')">CRM Integration</a></li>
+          <li><a href="#features" onclick="showHome(event,'#features')">Custom AI Training</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="#" onclick="showHome(event)">About Us</a></li>
+          <li><a href="#" onclick="showHome(event)">Case Studies</a></li>
+          <li><a href="#" onclick="showHome(event)">Careers</a></li>
+          <li><a href="#contact" onclick="showHome(event,'#contact')">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Legal</h5>
+        <ul>
+          <li><button onclick="showLegal('privacy')">Privacy Policy</button></li>
+          <li><button onclick="showLegal('terms')">Terms of Service</button></li>
+          <li><button onclick="showLegal('cookies')">Cookie Policy</button></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Arikon. All rights reserved.</p>
+      <span>Built for Australian Real Estate</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ── Legal content ──
+const PRIVACY_POLICY = `Last Updated: February 2024
+
+1. Introduction
+Arikon ("we", "us", or "our") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website and use our AI-powered real estate solutions, in accordance with the Privacy Act 1988 (Cth) and the Australian Privacy Principles (APPs).
+
+2. Information We Collect
+We may collect personal information that you voluntarily provide to us when you express an interest in obtaining information about us or our products and services. This includes:
+- Name and contact data (email address, phone number).
+- Agency details and professional information.
+- Property data and enquiry details processed through our AI agents.
+
+3. How We Use Your Information
+We use personal information collected via our website for a variety of business purposes, including:
+- To provide and facilitate delivery of our AI services (Appraisal Accelerator and Voice Agent).
+- To respond to user enquiries and offer support.
+- To send administrative information to you.
+- To improve our AI models and service quality (using de-identified data where possible).
+
+4. Disclosure of Your Information
+We may share information we have collected about you in certain situations:
+- With third-party service providers who perform services for us or on our behalf.
+- To comply with legal obligations or protect our rights.
+- In connection with a business transfer (e.g., merger or sale).
+
+5. Security of Your Information
+We use administrative, technical, and physical security measures to help protect your personal information. While we have taken reasonable steps to secure the personal information you provide to us, please be aware that despite our efforts, no security measures are perfect or impenetrable.
+
+6. Your Rights
+Under the Australian Privacy Principles, you have the right to:
+- Access the personal information we hold about you.
+- Request the correction of inaccurate personal information.
+- Make a complaint if you believe we have breached the APPs.
+
+7. Contact Us
+If you have questions or comments about this Privacy Policy, please contact us at: info@arikon.com.au`;
+
+const TERMS_OF_SERVICE = `Last Updated: February 2024
+
+1. Agreement to Terms
+By accessing or using Arikon's website and services, you agree to be bound by these Terms of Service. If you do not agree to all of these terms, then you are prohibited from using the site and services.
+
+2. Intellectual Property Rights
+Unless otherwise indicated, the site and services are our proprietary property and all source code, databases, functionality, software, website designs, audio, video, text, photographs, and graphics on the site are owned or controlled by us or licensed to us.
+
+3. User Representations
+By using the services, you represent and warrant that: (1) all registration information you submit will be true, accurate, current, and complete; (2) you will maintain the accuracy of such information; (3) you have the legal capacity and you agree to comply with these Terms of Service.
+
+4. AI Service Limitations
+Our services utilize advanced AI models. While we strive for high accuracy, you acknowledge that:
+- AI-generated responses may occasionally contain inaccuracies.
+- You are responsible for reviewing and verifying critical information provided by the AI agents.
+- Arikon is not liable for any decisions made based on AI-generated content.
+
+5. Australian Consumer Law
+Nothing in these Terms excludes, restricts or modifies any guarantee, condition, warranty, right or remedy implied or imposed by the Australian Consumer Law (ACL) which cannot be lawfully excluded, restricted or modified.
+
+6. Limitation of Liability
+To the maximum extent permitted by law, Arikon shall not be liable for any indirect, incidental, special, consequential, or punitive damages, or any loss of profits or revenues, whether incurred directly or indirectly.
+
+7. Governing Law
+These Terms shall be governed by and defined following the laws of New South Wales, Australia. You irrevocably consent that the courts of New South Wales shall have exclusive jurisdiction to resolve any dispute which may arise in connection with these terms.`;
+
+const COOKIE_POLICY = `Last Updated: February 2024
+
+1. What are Cookies?
+Cookies are small text files that are stored on your computer or mobile device when you visit a website. They are widely used to make websites work, or work more efficiently, as well as to provide information to the owners of the site.
+
+2. How We Use Cookies
+We use cookies for the following purposes:
+- Essential Cookies: Necessary for the website to function properly.
+- Analytics Cookies: To understand how visitors interact with our website, helping us improve our services.
+- Functionality Cookies: To remember choices you make and provide enhanced, more personal features.
+
+3. Your Choices Regarding Cookies
+Most web browsers are set to accept cookies by default. If you prefer, you can usually choose to set your browser to remove cookies and to reject cookies. Please note that if you choose to remove or reject cookies, this could affect the availability and functionality of our services.
+
+4. Third-Party Cookies
+In addition to our own cookies, we may also use various third-party cookies to report usage statistics of the service, deliver advertisements on and through the service, and so on.
+
+5. Updates to This Policy
+We may update this Cookie Policy from time to time in order to reflect, for example, changes to the cookies we use or for other operational, legal or regulatory reasons.`;
+
+// ── Navbar scroll ──
+window.addEventListener('scroll', () => {
+  const nav = document.getElementById('navbar');
+  if (window.scrollY > 20) nav.classList.add('scrolled');
+  else nav.classList.remove('scrolled');
+});
+
+// ── Mobile menu ──
+function toggleMobile() {
+  const menu = document.getElementById('mobile-menu');
+  const menuIcon = document.getElementById('menuIcon');
+  const closeIcon = document.getElementById('closeIcon');
+  const open = menu.classList.toggle('open');
+  menuIcon.style.display = open ? 'none' : 'block';
+  closeIcon.style.display = open ? 'block' : 'none';
+}
+function closeMobile() {
+  document.getElementById('mobile-menu').classList.remove('open');
+  document.getElementById('menuIcon').style.display = 'block';
+  document.getElementById('closeIcon').style.display = 'none';
+}
+
+// ── Page switching ──
+function showHome(event, hash) {
+  if (event) event.preventDefault();
+  document.getElementById('main-content').style.display = 'block';
+  document.getElementById('legal-page').style.display = 'none';
+  window.scrollTo(0, 0);
+  if (hash) {
+    setTimeout(() => {
+      const el = document.querySelector(hash);
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }, 50);
+  }
+}
+
+function showLegal(type) {
+  const titles = { privacy: 'Privacy Policy', terms: 'Terms of Service', cookies: 'Cookie Policy' };
+  const contents = { privacy: PRIVACY_POLICY, terms: TERMS_OF_SERVICE, cookies: COOKIE_POLICY };
+  document.getElementById('legal-title').textContent = titles[type];
+  const contentEl = document.getElementById('legal-content');
+  contentEl.innerHTML = '';
+  contents[type].split('\n\n').forEach(para => {
+    const p = document.createElement('p');
+    p.textContent = para;
+    contentEl.appendChild(p);
+  });
+  document.getElementById('main-content').style.display = 'none';
+  document.getElementById('legal-page').style.display = 'block';
+  window.scrollTo(0, 0);
+}
+
+// ── Contact form ──
+async function handleSubmit(e) {
+  e.preventDefault();
+  const btn = document.getElementById('submitBtn');
+  const text = document.getElementById('submitText');
+  const success = document.getElementById('formSuccess');
+  const error = document.getElementById('formError');
+  const form = document.getElementById('contactForm');
+
+  btn.disabled = true;
+  text.textContent = 'Sending...';
+  success.style.display = 'none';
+  error.style.display = 'none';
+
+  const inputs = form.querySelectorAll('input, textarea');
+  const data = {
+    name: inputs[0].value,
+    email: inputs[1].value,
+    phone: inputs[2].value,
+    message: inputs[3].value
+  };
+
+  try {
+    const res = await fetch('https://formspree.io/f/xgolzdag', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+    if (res.ok) {
+      success.style.display = 'block';
+      form.reset();
+    } else {
+      error.style.display = 'block';
+    }
+  } catch {
+    error.style.display = 'block';
+  }
+
+  btn.disabled = false;
+  text.textContent = 'Send Message';
+}
+
+// ── Scroll animations ──
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.fade-in, .fade-left, .fade-right').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
