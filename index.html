@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arikon — AI Infrastructure for Australian Real Estate</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav id="navbar" class="navbar">
+    <div class="nav-inner">
+      <div class="logo" onclick="showView('home')">
+        <div class="logo-icon">A</div>
+        <span class="logo-text">Arikon</span>
+      </div>
+
+      <div class="nav-links" id="navLinks">
+        <a href="#solutions" onclick="showView('home')" class="nav-link">Solutions</a>
+        <div class="nav-dropdown-wrap">
+          <button class="nav-link dropdown-btn" onclick="togglePlatform(event)">
+            Platform <span class="chevron" id="platformChevron">▾</span>
+          </button>
+          <div class="dropdown-menu" id="platformMenu">
+            <a href="#modules" onclick="showView('home')" class="dropdown-item">Infrastructure</a>
+            <a href="#architecture" onclick="showView('home')" class="dropdown-item">Architecture</a>
+            <a href="#how-it-works" onclick="showView('home')" class="dropdown-item">Deployment</a>
+          </div>
+        </div>
+        <a href="#about" onclick="showView('about'); return false;" class="nav-link">About</a>
+        <a href="#contact" onclick="showView('home')" class="nav-link">Contact</a>
+        <a href="https://calendly.com/arikon" target="_blank" rel="noopener noreferrer" class="btn-primary nav-cta">Book a Strategy Call</a>
+      </div>
+
+      <button class="mobile-menu-btn" onclick="toggleMobileMenu()" id="mobileBtn">
+        <span id="menuIcon">&#9776;</span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu" style="display:none;">
+      <a href="#solutions" onclick="closeMobileMenu(); showView('home');" class="mobile-link">Solutions</a>
+      <div class="mobile-group-label">Platform</div>
+      <a href="#modules" onclick="closeMobileMenu(); showView('home');" class="mobile-link">Infrastructure</a>
+      <a href="#architecture" onclick="closeMobileMenu(); showView('home');" class="mobile-link">Architecture</a>
+      <a href="#how-it-works" onclick="closeMobileMenu(); showView('home');" class="mobile-link">Deployment</a>
+      <a href="#about" onclick="closeMobileMenu(); showView('about'); return false;" class="mobile-link">About</a>
+      <a href="#contact" onclick="closeMobileMenu(); showView('home');" class="mobile-link">Contact</a>
+      <a href="https://calendly.com/arikon" target="_blank" class="btn-primary mobile-cta">Book a Strategy Call</a>
+    </div>
+  </nav>
+
+  <!-- HOME VIEW -->
+  <div id="view-home">
+
+    <!-- HERO -->
+    <section class="hero" id="hero">
+      <div class="hero-bg">
+        <div class="hero-blob hero-blob-1"></div>
+        <div class="hero-blob hero-blob-2"></div>
+        <div class="bg-grid hero-grid"></div>
+      </div>
+      <div class="container text-center">
+        <div class="fade-in">
+          <div class="badge">🇦🇺 AI Infrastructure for the Australian Property Ecosystem</div>
+          <h1 class="hero-title">AI Infrastructure for <span class="animate-gradient">Australian Real Estate</span></h1>
+          <p class="hero-sub">Arikon deploys managed AI infrastructure that captures every enquiry and automates your agency's core workflows. Your team responds faster, wins more listings, and scales with confidence, 24/7.</p>
+          <div class="hero-btns">
+            <a href="https://calendly.com/arikon" target="_blank" rel="noopener noreferrer" class="btn-primary btn-lg">Book a Strategy Call →</a>
+            <a href="#solutions" class="btn-outline btn-lg">View Solutions</a>
+          </div>
+          <div class="hero-metrics">
+            <div class="metric-card fade-up">
+              <div class="metric-icon">⏱</div>
+              <p class="metric-label">Response Time</p>
+              <p class="metric-value">Under 60s</p>
+            </div>
+            <div class="metric-card fade-up">
+              <div class="metric-icon">⚡</div>
+              <p class="metric-label">Operational Layer</p>
+              <p class="metric-value">24/7 Active</p>
+            </div>
+            <div class="metric-card fade-up">
+              <div class="metric-icon">🔗</div>
+              <p class="metric-label">Integration</p>
+              <p class="metric-value">CRM Connected</p>
+            </div>
+            <div class="metric-card fade-up">
+              <div class="metric-icon">🏢</div>
+              <p class="metric-label">Scalability</p>
+              <p class="metric-value">Multi-Office</p>
+            </div>
+          </div>
+          <p class="hero-sub-note">Designed for Australian agencies. Built for scale.</p>
+        </div>
+
+        <!-- Infrastructure Diagram -->
+        <div class="infra-diagram-wrap fade-up">
+          <div class="infra-diagram">
+            <div class="infra-grid-bg"></div>
+
+            <div class="infra-rings">
+              <div class="ring ring-1"></div>
+              <div class="ring ring-2"></div>
+              <div class="ring ring-3"></div>
+            </div>
+
+            <svg class="infra-svg" viewBox="0 0 800 400">
+              <defs>
+                <filter id="glow">
+                  <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+                  <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
+              </defs>
+              <path d="M 400 200 L 150 80" stroke="rgba(59,130,246,0.1)" stroke-width="1" fill="none"/>
+              <path d="M 400 200 L 650 80" stroke="rgba(59,130,246,0.1)" stroke-width="1" fill="none"/>
+              <path d="M 400 200 L 150 320" stroke="rgba(59,130,246,0.1)" stroke-width="1" fill="none"/>
+              <path d="M 400 200 L 650 320" stroke="rgba(59,130,246,0.1)" stroke-width="1" fill="none"/>
+              <path class="pulse-path" d="M 400 200 L 150 80" stroke="rgba(59,130,246,0.5)" stroke-width="2" fill="none" stroke-dasharray="10,100" filter="url(#glow)" style="animation-delay:0s"/>
+              <path class="pulse-path" d="M 400 200 L 650 80" stroke="rgba(59,130,246,0.5)" stroke-width="2" fill="none" stroke-dasharray="10,100" filter="url(#glow)" style="animation-delay:0.5s"/>
+              <path class="pulse-path" d="M 400 200 L 150 320" stroke="rgba(59,130,246,0.5)" stroke-width="2" fill="none" stroke-dasharray="10,100" filter="url(#glow)" style="animation-delay:1s"/>
+              <path class="pulse-path" d="M 400 200 L 650 320" stroke="rgba(59,130,246,0.5)" stroke-width="2" fill="none" stroke-dasharray="10,100" filter="url(#glow)" style="animation-delay:1.5s"/>
+            </svg>
+
+            <div class="infra-center">
+              <div class="pulse-rings">
+                <div class="pulse-ring" style="animation-delay:0s"></div>
+                <div class="pulse-ring" style="animation-delay:1.3s"></div>
+                <div class="pulse-ring" style="animation-delay:2.6s"></div>
+              </div>
+              <div class="center-node">
+                <div class="center-node-icon">⬡</div>
+                <div class="center-node-label">Infrastructure Core</div>
+                <div class="center-node-title">ARIKON AI</div>
+                <div class="center-node-sub">Enterprise Managed Layer</div>
+              </div>
+            </div>
+
+            <div class="infra-module module-tl">
+              <div class="module-icon">⚡</div>
+              <div class="module-title">Seller Capture Infrastructure</div>
+              <div class="module-sub">Automated appraisal ingestion</div>
+            </div>
+            <div class="infra-module module-tr">
+              <div class="module-icon">📞</div>
+              <div class="module-title">Voice Operations Infrastructure</div>
+              <div class="module-sub">AI inbound & outbound calls</div>
+            </div>
+            <div class="infra-module module-bl">
+              <div class="module-icon">👥</div>
+              <div class="module-title">Buyer Qualification Infrastructure</div>
+              <div class="module-sub">Automated screening & scheduling</div>
+            </div>
+            <div class="infra-module module-br">
+              <div class="module-icon">🏠</div>
+              <div class="module-title">Property Management Automation</div>
+              <div class="module-sub">Triage & renewal workflows</div>
+            </div>
+
+            <div class="infra-indicators">
+              <div class="indicator">⏱ Under 60s Response</div>
+              <div class="indicator">⚡ 24/7 Active</div>
+              <div class="indicator">🔗 CRM Connected</div>
+              <div class="indicator">🏢 Multi-Office Ready</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SOLUTIONS -->
+    <section id="solutions" class="section bg-white">
+      <div class="container">
+        <div class="section-header reveal">
+          <p class="section-eyebrow">Product Ecosystem</p>
+          <h2 class="section-title">Solutions Powered by <span class="text-blue">Arikon Infrastructure.</span></h2>
+          <p class="section-sub">Three managed AI infrastructure systems designed to increase listings, automate operations, and scale modern Australian agencies.</p>
+        </div>
+
+        <!-- Solution 1: Appraisal Accelerator -->
+        <div class="solution-row reveal">
+          <div class="solution-text">
+            <div class="solution-badge">✦ Revenue Engine</div>
+            <h3 class="solution-title">Arikon Appraisal Accelerator</h3>
+            <p class="solution-subtitle">Captures and converts appraisal enquiries into booked listings — automatically.</p>
+            <ul class="solution-list">
+              <li>Responds to appraisal enquiries in under 60 seconds</li>
+              <li>Qualifies and scores seller intent</li>
+              <li>Automatically books appraisal appointments</li>
+              <li>Sends instant SMS alerts to agents</li>
+            </ul>
+            <p class="solution-micro">Built for agencies competing on speed-to-lead.</p>
+            <p class="solution-tagline">"Never miss a listing opportunity again."</p>
+          </div>
+          <div class="solution-visual">
+            <div class="anim-terminal">
+              <div class="terminal-row incoming">
+                <div class="term-row-top"><span class="term-blue">INCOMING_ENQUIRY</span><span class="term-grey">0.0s</span></div>
+                <div class="term-text">Source: RealEstate.com.au</div>
+                <div class="term-text">Type: Appraisal Request</div>
+              </div>
+              <div class="terminal-row response">
+                <div class="term-row-top"><span class="term-lblue">AI_RESPONSE_TRIGGERED</span><span class="term-grey">0.8s</span></div>
+                <div class="term-text">"Hi Sarah, I've received your request..."</div>
+              </div>
+              <div class="terminal-row score">
+                <span class="term-small-label">Lead Score</span>
+                <span class="term-score">88 HOT</span>
+              </div>
+              <div class="terminal-row appointment">
+                <div class="term-row-top"><span class="term-green">✓ APPOINTMENT_CONFIRMED</span></div>
+                <div class="term-text">Tuesday, 10:30 AM</div>
+              </div>
+              <div class="terminal-row alert">
+                <span class="term-white-bold">📢 AGENT_ALERT: NEW LISTING OP</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Solution 2: Voice Agent -->
+        <div class="solution-row solution-row-reverse reveal">
+          <div class="solution-text">
+            <div class="solution-badge">✦ 24/7 AI Voice Operations</div>
+            <h3 class="solution-title">Arikon Voice Agent</h3>
+            <p class="solution-subtitle">24/7 AI call infrastructure that captures every call and generates new ones.</p>
+            <div class="voice-cols">
+              <div>
+                <p class="voice-col-label">Inbound</p>
+                <ul class="solution-list">
+                  <li>Answers all incoming calls</li>
+                  <li>After-hours & weekend coverage</li>
+                  <li>Books inspections and appraisals</li>
+                </ul>
+              </div>
+              <div>
+                <p class="voice-col-label">Outbound</p>
+                <ul class="solution-list">
+                  <li>Reactivates old leads</li>
+                  <li>Follows up after open homes</li>
+                  <li>Calls appraisal prospects</li>
+                </ul>
+              </div>
+            </div>
+            <p class="solution-tagline">"Arikon doesn't just answer calls — it creates them."</p>
+          </div>
+          <div class="solution-visual">
+            <div class="anim-voice">
+              <div class="voice-bars">
+                <div class="vbar" style="animation-delay:0s"></div>
+                <div class="vbar" style="animation-delay:0.1s"></div>
+                <div class="vbar" style="animation-delay:0.2s"></div>
+                <div class="vbar" style="animation-delay:0.3s"></div>
+                <div class="vbar" style="animation-delay:0.4s"></div>
+                <div class="vbar" style="animation-delay:0.5s"></div>
+                <div class="vbar" style="animation-delay:0.6s"></div>
+                <div class="vbar" style="animation-delay:0.7s"></div>
+                <div class="vbar" style="animation-delay:0.8s"></div>
+                <div class="vbar" style="animation-delay:0.9s"></div>
+                <div class="vbar" style="animation-delay:1.0s"></div>
+                <div class="vbar" style="animation-delay:1.1s"></div>
+                <div class="vbar" style="animation-delay:1.2s"></div>
+                <div class="vbar" style="animation-delay:1.3s"></div>
+                <div class="vbar" style="animation-delay:1.4s"></div>
+              </div>
+              <div class="voice-info">
+                <div class="voice-call-icon">📞</div>
+                <p class="voice-call-label">Inbound Call Active</p>
+                <div class="voice-status">Appraisal Booked</div>
+                <div class="voice-status-2">→ Outbound Reactivation</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Solution 3: Automation Suite -->
+        <div class="solution-row reveal">
+          <div class="solution-text">
+            <div class="solution-badge">✦ Enterprise Infrastructure</div>
+            <h3 class="solution-title">Arikon Automation Suite</h3>
+            <p class="solution-subtitle">The complete managed AI infrastructure layer for growth-focused agencies.</p>
+            <ul class="solution-list">
+              <li>Appraisal Accelerator</li>
+              <li>Voice Agent</li>
+              <li>SMS & Email automation workflows</li>
+              <li>Performance analytics & reporting</li>
+            </ul>
+            <p class="solution-tagline">One always-on AI operating layer across your entire agency.</p>
+          </div>
+          <div class="solution-visual">
+            <div class="anim-automation">
+              <div class="auto-center">
+                <div class="auto-center-icon">⬡</div>
+              </div>
+              <div class="auto-orbit">
+                <div class="auto-node an1">⚡</div>
+                <div class="auto-node an2">📞</div>
+                <div class="auto-node an3">🗄</div>
+                <div class="auto-node an4">💬</div>
+                <div class="auto-node an5">📊</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CORE INFRASTRUCTURE MODULES -->
+    <section id="modules" class="section bg-white">
+      <div class="container">
+        <div class="section-header reveal">
+          <p class="section-eyebrow">Modular Architecture</p>
+          <h2 class="section-title">Core Infrastructure Modules</h2>
+          <p class="section-sub">Arikon is built as a foundational AI layer within property businesses, delivering modular systems across every core operation.</p>
+        </div>
+        <div class="modules-grid">
+          <div class="module-card reveal">
+            <div class="module-card-top">
+              <div class="module-card-icon blue-icon">⚡</div>
+              <span class="module-status status-active">Active</span>
+            </div>
+            <h3 class="module-card-title">Seller Capture Infrastructure</h3>
+            <p class="module-card-desc">Captures, qualifies, and books appraisal enquiries automatically — ensuring no seller opportunity is missed.</p>
+          </div>
+          <div class="module-card reveal">
+            <div class="module-card-top">
+              <div class="module-card-icon dark-icon">📞</div>
+              <span class="module-status status-active">Active</span>
+            </div>
+            <h3 class="module-card-title">Voice Operations Infrastructure</h3>
+            <p class="module-card-desc">AI voice infrastructure managing inbound and outbound calls with agency-specific logic and escalation — ensuring consistent, professional response at scale.</p>
+          </div>
+          <div class="module-card reveal">
+            <div class="module-card-top">
+              <div class="module-card-icon blue-icon">👥</div>
+              <span class="module-status status-soon">Coming Soon</span>
+            </div>
+            <h3 class="module-card-title">Buyer Qualification Infrastructure</h3>
+            <p class="module-card-desc">Automates buyer screening, inspection scheduling, and CRM enrichment — improving efficiency and buyer conversion.</p>
+          </div>
+          <div class="module-card reveal">
+            <div class="module-card-top">
+              <div class="module-card-icon dark-icon">🏠</div>
+              <span class="module-status status-roadmap">Roadmap</span>
+            </div>
+            <h3 class="module-card-title">Property Management Automation</h3>
+            <p class="module-card-desc">Automates tenant communication, maintenance triage, arrears alerts, and renewals — reducing manual workload and operational friction.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ECOSYSTEM VISION (dark section) -->
+    <section class="section bg-dark">
+      <div class="container">
+        <div class="ecosystem-grid">
+          <div class="reveal">
+            <p class="section-eyebrow blue-eyebrow">Market Coverage</p>
+            <h2 class="section-title white-title">Powering the Australian Property Ecosystem</h2>
+            <p class="ecosystem-desc">Arikon is building modular AI infrastructure across the Australian property ecosystem — starting with sales operations and expanding into every critical workflow that powers property businesses.</p>
+            <p class="ecosystem-note">Designed to unify the fragmented property workflow into one intelligent infrastructure layer.</p>
+            <div class="sectors-grid">
+              <div class="sector-item">🏢 Sales Agencies</div>
+              <div class="sector-item">🏠 Property Management</div>
+              <div class="sector-item">💼 Mortgage Brokers</div>
+              <div class="sector-item">🏗 Developers</div>
+              <div class="sector-item">⚖ Conveyancers</div>
+            </div>
+          </div>
+          <div class="ecosystem-visual reveal">
+            <div class="eco-orb">
+              <div class="eco-glow"></div>
+              <div class="eco-outer">
+                <div class="eco-dot"></div>
+              </div>
+              <div class="eco-inner">
+                <div class="eco-center-node">A</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ENTERPRISE ARCHITECTURE -->
+    <section id="architecture" class="section bg-white">
+      <div class="container">
+        <div class="arch-header reveal">
+          <p class="section-eyebrow">Enterprise Standards</p>
+          <h2 class="section-title">Enterprise-Grade Infrastructure</h2>
+          <p class="section-sub max-700">Arikon is engineered to support multi-office growth with secure, compliant, and scalable infrastructure — delivering the technical foundation required for enterprise-scale property operations.</p>
+        </div>
+        <div class="arch-grid">
+          <div class="arch-item reveal"><span class="arch-icon">🗄</span> Unified CRM Integration Layer</div>
+          <div class="arch-item reveal"><span class="arch-icon">💬</span> Real-Time SMS & Lead Routing Engine</div>
+          <div class="arch-item reveal"><span class="arch-icon">📅</span> Calendar & Scheduling Synchronisation</div>
+          <div class="arch-item reveal"><span class="arch-icon">🌐</span> Property Portal Ingestion Engine</div>
+          <div class="arch-item reveal"><span class="arch-icon">🛡</span> Secure Australian Cloud Deployment</div>
+          <div class="arch-item reveal"><span class="arch-icon">📞</span> Australian-Based SMS & Voice Routing</div>
+          <div class="arch-item reveal"><span class="arch-icon">🏢</span> Multi-Office & Network Scalability</div>
+        </div>
+        <div class="text-center reveal">
+          <p class="arch-note">Designed to integrate seamlessly with existing agency systems.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section id="how-it-works" class="section bg-white bg-grid-overlay">
+      <div class="container">
+        <div class="section-header reveal">
+          <p class="section-eyebrow">Deployment Process</p>
+          <h2 class="section-title">Fully Managed Deployment</h2>
+          <p class="section-sub">Our team manages the entire deployment process from CRM integration to full operational activation and scale.</p>
+        </div>
+        <div class="steps-grid">
+          <div class="step-card reveal">
+            <div class="step-bg-num">01</div>
+            <div class="step-num-badge">01</div>
+            <h4 class="step-title">Connect CRM Layer</h4>
+            <p class="step-desc">We securely integrate with your existing CRM, listings, and enquiry sources — enabling Arikon to understand your properties, vendors, and local market from day one.</p>
+          </div>
+          <div class="step-card reveal">
+            <div class="step-bg-num">02</div>
+            <div class="step-num-badge">02</div>
+            <h4 class="step-title">Operational Configuration</h4>
+            <p class="step-desc">We configure your infrastructure to reflect your brand voice, suburb expertise, and appraisal strategy — ensuring every enquiry is handled consistently and professionally.</p>
+          </div>
+          <div class="step-card reveal">
+            <div class="step-bg-num">03</div>
+            <div class="step-num-badge">03</div>
+            <h4 class="step-title">Scale Operations</h4>
+            <p class="step-desc">Once activated, Arikon operates across your website, portals, and phone lines, 24/7, creating a unified, always-on automation layer across your business.</p>
+          </div>
+        </div>
+        <div class="text-center reveal">
+          <p class="arch-note">Designed for seamless integration with leading Australian CRM systems.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT FORM -->
+    <section id="contact" class="section bg-white contact-section">
+      <div class="contact-blob"></div>
+      <div class="container">
+        <div class="contact-grid">
+          <div class="reveal">
+            <h2 class="contact-title">Let's build your agency's <span class="text-blue">AI infrastructure.</span></h2>
+            <p class="contact-desc">Ready to automate your operations and capture more opportunity? Our team will design and deploy the right AI infrastructure for your agency — built to integrate, scale, and operate 24/7.</p>
+            <div class="contact-info-row">
+              <div class="contact-info-icon">💬</div>
+              <div>
+                <h5 class="contact-info-label">Email Us</h5>
+                <p class="contact-info-val">info@arikon.com.au</p>
+              </div>
+            </div>
+          </div>
+          <div class="contact-form-wrap reveal">
+            <form id="contactForm" onsubmit="handleSubmit(event)">
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">Full Name</label>
+                  <input required type="text" id="fname" placeholder="John Smith" class="form-input" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Email Address</label>
+                  <input required type="email" id="femail" placeholder="john@agency.com.au" class="form-input" />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">Phone Number</label>
+                  <input required type="tel" id="fphone" placeholder="0400 000 000" class="form-input" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Company Name</label>
+                  <input required type="text" id="fcompany" placeholder="Your Agency Name" class="form-input" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Message</label>
+                <textarea required id="fmessage" rows="4" placeholder="Tell us about your agency..." class="form-input"></textarea>
+              </div>
+              <button type="submit" class="form-btn" id="formBtn">Send Message →</button>
+              <div id="formSuccess" class="form-success" style="display:none;">Message sent successfully! We'll be in touch.</div>
+              <div id="formError" class="form-error" style="display:none;">Something went wrong. Please try again.</div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="section bg-light-grey">
+      <div class="container narrow">
+        <div class="section-header reveal">
+          <p class="section-eyebrow">Support & Clarity</p>
+          <h2 class="section-title">Frequently Asked Questions</h2>
+          <p class="section-sub">Everything you need to know about Arikon's AI solutions.</p>
+        </div>
+        <div class="faq-list">
+          <div class="faq-item reveal" onclick="toggleFaq(this)">
+            <div class="faq-q">What is Arikon? <span class="faq-arrow">▾</span></div>
+            <div class="faq-a">Arikon is a managed AI infrastructure platform purpose-built for Australian real estate agencies. We automate seller enquiries, lead qualification, and voice interactions — creating a unified operational layer that runs 24/7 across your agency.</div>
+          </div>
+          <div class="faq-item reveal" onclick="toggleFaq(this)">
+            <div class="faq-q">How does the AI handle seller enquiries? <span class="faq-arrow">▾</span></div>
+            <div class="faq-a">When a seller enquiry is received via your website or property portals, Arikon responds instantly with a professional, brand-aligned message. The system qualifies the lead, gathers key property details, scores the opportunity, and routes it to the right agent in real time.</div>
+          </div>
+          <div class="faq-item reveal" onclick="toggleFaq(this)">
+            <div class="faq-q">Can it integrate with my existing CRM? <span class="faq-arrow">▾</span></div>
+            <div class="faq-a">Yes. Arikon integrates seamlessly with major Australian real estate CRMs. All enquiries, conversations, and lead updates are automatically synced, ensuring your team works from a single source of truth.</div>
+          </div>
+          <div class="faq-item reveal" onclick="toggleFaq(this)">
+            <div class="faq-q">Is the voice agent natural sounding? <span class="faq-arrow">▾</span></div>
+            <div class="faq-a">Yes. Our voice agent uses advanced speech technology trained for real estate conversations. It handles inbound calls, answers common questions, qualifies sellers, and books appraisals directly into your calendar — sounding professional and local.</div>
+          </div>
+          <div class="faq-item reveal" onclick="toggleFaq(this)">
+            <div class="faq-q">How long does implementation take? <span class="faq-arrow">▾</span></div>
+            <div class="faq-a">Implementation is fully managed by our team and typically completed within a few days. There is no complex technical setup required from your agency.</div>
+          </div>
+          <div class="faq-item reveal" onclick="toggleFaq(this)">
+            <div class="faq-q">Will this replace my agents? <span class="faq-arrow">▾</span></div>
+            <div class="faq-a">No. Arikon is built to support your agents, not replace them. It handles the initial response, qualification, and routing so your team can focus on high-value conversations, listing presentations, and closing deals.</div>
+          </div>
+          <div class="faq-item reveal" onclick="toggleFaq(this)">
+            <div class="faq-q">Is our data secure? <span class="faq-arrow">▾</span></div>
+            <div class="faq-a">Yes. Arikon operates on secure cloud infrastructure with strict access controls and enterprise-grade security standards. All enquiry data remains owned by your agency and is handled in line with Australian privacy regulations.</div>
+          </div>
+          <div class="faq-item reveal" onclick="toggleFaq(this)">
+            <div class="faq-q">Does Arikon work outside business hours? <span class="faq-arrow">▾</span></div>
+            <div class="faq-a">Yes. Arikon operates 24/7 across your website, property portals, and phone lines. Every enquiry is captured and responded to instantly — even after hours, on weekends, and during peak listing periods.</div>
+          </div>
+          <div class="faq-item reveal" onclick="toggleFaq(this)">
+            <div class="faq-q">Can we customise the AI to match our brand? <span class="faq-arrow">▾</span></div>
+            <div class="faq-a">Absolutely. Arikon is configured to reflect your agency's brand voice, suburb expertise, and appraisal strategy. Every response is professional, on-brand, and aligned with how your team communicates with sellers.</div>
+          </div>
+          <div class="faq-item reveal" onclick="toggleFaq(this)">
+            <div class="faq-q">What happens if a lead needs human attention? <span class="faq-arrow">▾</span></div>
+            <div class="faq-a">Arikon intelligently escalates high-value or complex enquiries to the appropriate agent in real time. Your team is notified immediately, ensuring seamless human follow-up when required.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section cta-section">
+      <div class="container">
+        <div class="cta-box reveal">
+          <div class="cta-bg-overlay"></div>
+          <div class="cta-content">
+            <h2 class="cta-title">Deploy AI Infrastructure Across Your Real Estate Business.</h2>
+            <p class="cta-sub">Book a strategy call to see how Arikon becomes your always-on operational layer — capturing every enquiry and powering your agency 24/7.</p>
+            <div class="cta-btns">
+              <a href="https://calendly.com/arikon" target="_blank" class="btn-white btn-lg">Book a Strategy Call</a>
+              <a href="#contact" onclick="showView('home')" class="btn-dark-outline btn-lg">Speak to Our Team</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div><!-- end #view-home -->
+
+  <!-- ABOUT VIEW -->
+  <div id="view-about" style="display:none;" class="pt-nav">
+    <section class="section bg-white">
+      <div class="container">
+        <div class="about-grid">
+          <div class="reveal">
+            <h2 class="section-title">About Arikon<br /><span class="text-blue">Powering the Next Era of Australian Real Estate</span></h2>
+            <div class="about-text">
+              <p>Arikon was founded to solve a simple but costly problem in real estate:</p>
+              <p>Agencies lose revenue every day due to delayed responses, missed calls, disconnected systems, and manual processes.</p>
+              <p>In a market where speed-to-lead determines who wins the listing, traditional workflows are no longer enough.</p>
+              <p>Arikon builds managed AI infrastructure that captures, qualifies, and converts opportunities automatically — giving modern agencies a competitive edge.</p>
+            </div>
+          </div>
+          <div class="about-mission reveal">
+            <h3 class="about-section-title">Our Mission</h3>
+            <p class="about-mission-main">To become the foundational AI infrastructure layer for Australian real estate.</p>
+            <p class="about-mission-sub">We believe agencies should not be limited by manual processes or fragmented systems. AI should operate quietly in the background — responding instantly, booking automatically, and creating opportunities 24/7.</p>
+            <p class="about-mission-sub">Arikon exists to unify property workflows into one intelligent, always-on operational layer.</p>
+          </div>
+        </div>
+
+        <div class="about-three-cols">
+          <div class="reveal">
+            <h3 class="about-section-title">What We Do</h3>
+            <p class="about-sub-desc">Arikon designs and deploys managed AI systems across:</p>
+            <ul class="check-list">
+              <li>Seller enquiry automation</li>
+              <li>AI-powered inbound and outbound voice operations</li>
+              <li>CRM integrations</li>
+              <li>SMS and email workflows</li>
+              <li>Lead qualification and scoring</li>
+              <li>Performance analytics</li>
+            </ul>
+          </div>
+          <div class="reveal">
+            <h3 class="about-section-title">Built for Australian Agencies</h3>
+            <p class="about-sub-desc">Arikon is Melbourne-based and operates across Australia. We understand:</p>
+            <ul class="check-list">
+              <li>The importance of speed-to-lead</li>
+              <li>Competitive listing environments</li>
+              <li>After-hours call volume</li>
+              <li>Multi-office agency structures</li>
+              <li>Local compliance requirements</li>
+            </ul>
+          </div>
+          <div class="reveal">
+            <h3 class="about-section-title">Managed AI, Not DIY Software</h3>
+            <p class="about-sub-desc">Arikon is not a self-serve tool. We partner with agencies to design, deploy, and manage their AI infrastructure — ensuring seamless integration with existing CRM systems, call workflows, and operational processes.</p>
+            <p class="about-sub-note">From configuration to activation and scaling, our team supports the full deployment lifecycle.</p>
+          </div>
+        </div>
+
+        <div class="about-approach reveal">
+          <div class="text-center">
+            <h3 class="about-approach-title">Our Approach</h3>
+            <p class="about-approach-sub">Four pillars of our infrastructure design.</p>
+          </div>
+          <div class="approach-grid">
+            <div class="approach-card">
+              <h4>Enterprise-Grade Infrastructure</h4>
+              <p>Engineered for reliability, security, and compliance.</p>
+            </div>
+            <div class="approach-card">
+              <h4>Revenue-Focused Design</h4>
+              <p>Every system is built to increase listing conversion and operational efficiency.</p>
+            </div>
+            <div class="approach-card">
+              <h4>Always-On Operations</h4>
+              <p>24/7 automation across enquiries, calls, and communications.</p>
+            </div>
+            <div class="approach-card">
+              <h4>Scalable Architecture</h4>
+              <p>Built to support single offices and multi-location agencies.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="about-future reveal">
+          <h3 class="about-future-title">The Future of Real Estate Operations</h3>
+          <p class="about-future-desc">The next generation of agencies will not compete on effort alone. They will compete on speed, automation, and intelligent infrastructure. Arikon is building that foundation.</p>
+          <div class="about-cta-box">
+            <h4>Let's Build the Future Together</h4>
+            <p>Whether you're a boutique agency or a multi-office operation, Arikon provides the AI infrastructure to help you capture more listings, operate more efficiently, and scale with confidence.</p>
+            <a href="https://calendly.com/arikon" target="_blank" rel="noopener noreferrer" class="btn-white btn-lg about-cta-btn">Book a Strategy Call →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div><!-- end #view-about -->
+
+  <!-- LEGAL PAGES -->
+  <div id="view-privacy" style="display:none;" class="pt-nav">
+    <div class="legal-wrap">
+      <button onclick="showView('home')" class="back-btn">← Back to Home</button>
+      <h1 class="legal-title">Privacy Policy</h1>
+      <div class="legal-content" id="privacyContent"></div>
+    </div>
+  </div>
+  <div id="view-terms" style="display:none;" class="pt-nav">
+    <div class="legal-wrap">
+      <button onclick="showView('home')" class="back-btn">← Back to Home</button>
+      <h1 class="legal-title">Terms of Service</h1>
+      <div class="legal-content" id="termsContent"></div>
+    </div>
+  </div>
+  <div id="view-cookies" style="display:none;" class="pt-nav">
+    <div class="legal-wrap">
+      <button onclick="showView('home')" class="back-btn">← Back to Home</button>
+      <h1 class="legal-title">Cookie Policy</h1>
+      <div class="legal-content" id="cookiesContent"></div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="footer-logo" onclick="showView('home')">
+            <div class="footer-logo-icon">A</div>
+            <div>
+              <div class="footer-logo-text">Arikon</div>
+              <div class="footer-logo-sub">AI Infrastructure</div>
+            </div>
+          </div>
+          <p class="footer-desc">Managed AI infrastructure for Australian real estate agencies. Engineered for reliability. Built for scale.</p>
+          <p class="footer-desc-note">Australian-owned. Built for multi-office agencies.</p>
+          <div class="footer-socials">
+            <div class="social-icon">🌐</div>
+            <div class="social-icon">💬</div>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h5 class="footer-col-title">Solutions</h5>
+          <ul>
+            <li><a href="#solutions" onclick="showView('home')">Appraisal Accelerator</a></li>
+            <li><a href="#solutions" onclick="showView('home')">Arikon Voice Agent</a></li>
+            <li><a href="#solutions" onclick="showView('home')">Arikon Automation Suite</a></li>
+            <li><a href="#modules" onclick="showView('home')">CRM & System Integration</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5 class="footer-col-title">Company</h5>
+          <ul>
+            <li><button onclick="showView('about')">About</button></li>
+            <li><a href="#contact" onclick="showView('home')">Careers</a></li>
+            <li><a href="#contact" onclick="showView('home')">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5 class="footer-col-title">Legal</h5>
+          <ul>
+            <li><button onclick="showView('privacy')">Privacy Policy</button></li>
+            <li><button onclick="showView('terms')">Terms of Service</button></li>
+            <li><button onclick="showView('cookies')">Cookie Policy</button></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 Arikon. All rights reserved.</p>
+        <p>Purpose-built for Australian Real Estate Agencies</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
